@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "bundle": "webpack --config webpack.config.js"
+  },
   "keywords": [],
   "author": "xiaobai",
   "license": "ISC",
