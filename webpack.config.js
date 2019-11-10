@@ -22,6 +22,33 @@ module.exports = {
                     limit: 2048,
                 },
             },
+            {
+                test: /\.(eot|ttf|svg)$/i,
+                loader: 'file-loader',
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                // css-loader和style-loader 这两一般连着一起用，
+                // 执行顺序   从下往上执行  从右到左
+                // 先搞个加自动加前缀的postcss-loader+autoprefixer插件  https://github.com/postcss/autoprefixer#webpack
+                // sass-loader就不用解释了，跟less一样的
+                // css-loader会解析css文件内的@import import/require()等引用，并合并成同一个文件
+                // style-loader 会把上面的一份css挂载到head标签内
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            // scss里面直接@import其他的scss文件的时候，直接走css-loader  会漏掉前面的两个loader
+                            // 所以此处 2 强制也要走postcss-loader和sass-loader
+                            importLoaders: 2,
+                            modules: true, // 样式模块化 CSS Module 防止样式冲突
+                        },
+                    },
+                    'sass-loader',
+                    'postcss-loader',
+                ],
+            },
         ],
     },
 };
