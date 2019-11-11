@@ -5,6 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     // 默认走的是生产模式，代码经过压缩
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+    // 粗暴解释：告诉你源代码里哪一行出错了，而不是打包后的代码，有个映射关系
+    devtool: process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
     entry: {
         main: './src/index.js',
         sub: './src/index.js',
