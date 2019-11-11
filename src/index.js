@@ -1,8 +1,10 @@
 // import '@babel/polyfill';
+import _ from 'lodash';
 
 // const logoImage = require('./assets/images/logo-round.png');
 // console.log('logoImage', logoImage);
 console.log('webpack demo');
+console.log('_', _);
 
 async function sleep() {
     return new Promise(resolve => {

@@ -8,8 +8,9 @@ module.exports = {
     },
     output: {
         // publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
-        path: path.resolve(__dirname, './dist'),
-        filename: '[name].js', // 上面的入口文件都会被引入
+        path: path.resolve(__dirname, '../dist'),
+        filename: '[name].[hash].js', // 上面的入口文件都会被引入
+        chunkFilename: '[name].[hash].js',
     },
     module: {
         rules: [
@@ -69,4 +70,9 @@ module.exports = {
             template: './src/tpl/index.html',
         }),
     ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
 };

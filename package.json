@@ -7,6 +7,7 @@
   "scripts": {
     "server": "node server.js",
     "dev": "webpack-dev-server --config ./build/webpack.dev.js",
+    "dev-build": "webpack --config ./build/webpack.dev.js",
     "build": "webpack --config ./build/webpack.prod.js"
   },
   "keywords": [],
@@ -41,5 +42,9 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^0.8.0"
   }
 }
