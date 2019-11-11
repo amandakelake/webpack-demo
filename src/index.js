@@ -1,7 +1,8 @@
-import '@babel/polyfill';
+// import '@babel/polyfill';
 
-const logoImage = require('./assets/images/logo-round.png');
-console.log('logoImage', logoImage);
+// const logoImage = require('./assets/images/logo-round.png');
+// console.log('logoImage', logoImage);
+console.log('webpack demo');
 
 async function sleep() {
     return new Promise(resolve => {
@@ -11,4 +12,6 @@ async function sleep() {
     });
 }
 console.log('time1', Date.now());
-sleep().then(console.log('time2', Date.now()));
+sleep().then(() => {
+    console.log('time2', Date.now());
+});

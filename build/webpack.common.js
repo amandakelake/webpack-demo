@@ -1,35 +1,21 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
-    // 默认走的是生产模式，代码经过压缩
-    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    // 粗暴解释：告诉你源代码里哪一行出错了，而不是打包后的代码，有个映射关系
-    devtool: process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
     entry: {
         main: './src/index.js',
-        // sub: './src/index.js',
     },
     output: {
-        publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
-        path: path.resolve(__dirname, 'dist'),
+        // publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
+        path: path.resolve(__dirname, './dist'),
         filename: '[name].js', // 上面的入口文件都会被引入
-    },
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        open: false, // 自动打开浏览器，访问本地地址
-        compress: true,
-        port: 8080,
-        hot: true, // 开启HMR 模块热更新
-        hotOnly: true, // 失败也不自动重启页面
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: /node_modules/, // 忽略该文件夹下的文件，提升编译性能
                 loader: 'babel-loader',
             },
             {
@@ -82,6 +68,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/tpl/index.html',
         }),
-        new webpack.HotModuleReplacementPlugin(),
     ],
 };
