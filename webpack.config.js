@@ -12,9 +12,15 @@ module.exports = {
         sub: './src/index.js',
     },
     output: {
-        // publicPath: '//s3.cdn.com', // publicPath可以用来添加文件的地址前缀(比如CDN)或者文件夹
+        publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js', // 上面的入口文件都会被引入
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        open: false, // 自动打开浏览器，访问本地地址
+        compress: true,
+        port: 8080,
     },
     module: {
         rules: [
