@@ -10,7 +10,7 @@ module.exports = {
     devtool: process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
     entry: {
         main: './src/index.js',
-        sub: './src/index.js',
+        // sub: './src/index.js',
     },
     output: {
         publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
@@ -27,6 +27,11 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            },
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 // url-loader比file-loader更叼一些 多了一个limit的配置参数
