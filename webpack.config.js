@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     // 默认走的是生产模式，代码经过压缩
@@ -21,6 +22,8 @@ module.exports = {
         open: false, // 自动打开浏览器，访问本地地址
         compress: true,
         port: 8080,
+        hot: true, // 开启HMR 模块热更新
+        hotOnly: true, // 失败也不自动重启页面
     },
     module: {
         rules: [
@@ -63,6 +66,10 @@ module.exports = {
                     'postcss-loader',
                 ],
             },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
+            },
         ],
     },
     plugins: [
@@ -70,5 +77,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/tpl/index.html',
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 };
