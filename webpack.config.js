@@ -5,10 +5,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     // 默认走的是生产模式，代码经过压缩
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    entry: './src/index.js',
+    entry: {
+        main: './src/index.js',
+        sub: './src/index.js',
+    },
     output: {
+        // publicPath: '//s3.cdn.com', // publicPath可以用来添加文件的地址前缀(比如CDN)或者文件夹
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js',
+        filename: '[name].js', // 上面的入口文件都会被引入
     },
     module: {
         rules: [
