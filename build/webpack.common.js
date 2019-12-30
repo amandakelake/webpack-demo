@@ -1,6 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
+
+// __dirname是当前配置文件所在的目录，往上一层才找得到loaders
+// console.log('path', path.resolve(__dirname, '../loaders'));
 
 module.exports = {
     entry: {
@@ -8,16 +13,20 @@ module.exports = {
     },
     output: {
         // publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, './dist'),
         filename: '[name].[hash].js', // 上面的入口文件都会被引入
         chunkFilename: '[name].[hash].js',
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/,
                 exclude: /node_modules/, // 忽略该文件夹下的文件，提升编译性能
-                loader: 'babel-loader',
+                loader: ['babel-loader', 'first-loader'],
+            },
+            {
+                test: /\.lgc$/,
+                exclude: /node_modules/,
+                loader: ['lgc-loader'],
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
@@ -63,6 +72,10 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
         ],
+    },
+    resolveLoader: {
+        // modules: ['node_modules', path.resolve(__dirname, '../loaders')],
+        modules: ['node_modules', 'loaders'], // 不通过path模块读取，会直接读取当前项目目录
     },
     plugins: [
         new CleanWebpackPlugin(),
