@@ -1,8 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {
-    CleanWebpackPlugin
-} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const LgcWebpackPlugin = require('../plugins/lgc-webpack-plugin');
 
 // __dirname是当前配置文件所在的目录，往上一层才找得到loaders
 // console.log('path', path.resolve(__dirname, '../loaders'));
@@ -13,15 +12,16 @@ module.exports = {
     },
     output: {
         // publicPath: '/', // publicPath可以用来添加静态资源文件的地址前缀(比如CDN)或者文件夹
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: '[name].[hash].js', // 上面的入口文件都会被引入
         chunkFilename: '[name].[hash].js',
     },
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.js$/,
                 exclude: /node_modules/, // 忽略该文件夹下的文件，提升编译性能
-                loader: ['babel-loader', 'first-loader'],
+                loader: ['babel-loader'],
             },
             {
                 test: /\.lgc$/,
@@ -82,6 +82,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/tpl/index.html',
         }),
+        new LgcWebpackPlugin(),
     ],
     optimization: {
         splitChunks: {

@@ -8,17 +8,20 @@
     "server": "node server.js",
     "dev": "webpack-dev-server --config ./build/webpack.dev.js",
     "dev-build": "webpack --config ./build/webpack.dev.js",
-    "build": "webpack --config ./build/webpack.prod.js"
+    "build": "webpack --config ./build/webpack.prod.js",
+    "debug": "node --inspect --inspect-brk node_modules/webpack/bin/webpack.js --config ./build/webpack.prod.js"
   },
   "keywords": [],
   "author": "xiaobai",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.7.2",
+    "@babel/core": "^7.7.7",
+    "@babel/parser": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/polyfill": "^7.7.0",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-env": "^7.7.7",
     "@babel/runtime-corejs2": "^7.7.2",
+    "@babel/traverse": "^7.7.4",
     "@fd/fd-cli-plugin-format-config": "^1.0.2",
     "autoprefixer": "^9.7.1",
     "babel-loader": "^8.0.6",
