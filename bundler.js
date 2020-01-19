@@ -65,6 +65,7 @@ const makeDependenciesGraph = entry => {
 
 const generateCode = entry => {
     const graph = makeDependenciesGraph(entry);
+    console.log('graph', graph);
     // 1、通过闭包执行，避免污染全局环境
     // 2、定义require方法，并立即执行，传入entry字符串
     // 3、require里再执行一个闭包(不污染上一个闭包的作用域)，用来执行依赖模块的代码，
@@ -90,39 +91,3 @@ const generateCode = entry => {
 
 const code = generateCode('./src/index.js');
 console.log('code', code);
-
-// '"use strict";\n' +
-// '\n' +
-// 'var _sayHello = _interopRequireDefault(require("./bundler-utils/say-hello.js"));\n' +
-// '\n' +
-// 'var _message = _interopRequireDefault(require("./bundler-utils/message.js"));\n' +
-// '\n' +
-// 'function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }\n' +
-// '\n' +
-// '(0, _sayHello["default"])(_message["default"]);'
-//
-//
-// "use strict";
-// var _sayHello = _interopRequireDefault(require("./bundler-utils/say-hello.js"));
-// var _message = _interopRequireDefault(require("./bundler-utils/message.js"));
-// function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }(0, _sayHello["default"])(_message["default"]);
-
-// '"use strict";\n' +
-// '\n' +
-// 'Object.defineProperty(exports, "__esModule", {\n' +
-// '  value: true\n' +
-// '});\n' +
-// 'exports["default"] = void 0;\n' +
-// '\n' +
-// 'var _name = require("./name.js");\n' +
-// '\n' +
-// 'var _default = "hello ".concat(_name.name);\n' +
-// '\n' +
-// 'exports["default"] = _default;'
-//
-// "use strict";
-// Object.defineProperty(exports, "__esModule", { value: true});
-// exports["default"] = void 0;
-// var _name = require("./name.js");
-// var _default = "hello ".concat(_name.name);
-// exports["default"] = _default;
