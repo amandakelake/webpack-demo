@@ -16,7 +16,7 @@ const Parser = {
             sourceType: 'module',
         });
     },
-    getDependecies: (ast, filename) => {
+    getDependencies: (ast, filename) => {
         const dependencies = {};
         traverse(ast, {
             ImportDeclaration({ node }) {
@@ -75,9 +75,9 @@ class Complier {
     }
 
     build(filename) {
-        const { getAst, getDependecies, getCode } = Parser;
+        const { getAst, getDependencies, getCode } = Parser;
         const ast = getAst(filename);
-        const dependencies = getDependecies(ast, filename);
+        const dependencies = getDependencies(ast, filename);
         const code = getCode(ast);
         return {
             filename,
