@@ -37,7 +37,7 @@ const Parser = {
     },
 };
 
-class Complier {
+class Compiler {
     constructor(options) {
         const { entry, output } = options;
         this.entry = entry;
@@ -108,4 +108,4 @@ class Complier {
     }
 }
 
-new Complier(Options).run();
+new Compiler(Options).run();
